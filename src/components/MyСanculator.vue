@@ -15,7 +15,7 @@
     <button @click="wholeDivision" class="calculation-btn">(\)</button>
     </div>
     <p v-if="showTxt">Введите пожалуйста число</p>
-    <p v-if="zero">На ноль делить нельзя!!!</p>
+    <p v-if="zero">На ноль делить нельзя!!!!</p>
   </div>
 </template>
 
