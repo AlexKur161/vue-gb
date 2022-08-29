@@ -16,6 +16,21 @@
     </div>
     <p v-if="showTxt">Введите пожалуйста число</p>
     <p v-if="zero">На ноль делить нельзя!!!!</p>
+    <div class="check-panel">
+    <input @change="showPanel = !showPanel" type="checkbox" name="test" id="test">
+    <label for="test">Показать панель ввода</label>
+    </div>
+    <div v-if="showPanel" class="panel">
+      <button @click="PanelBtnAdd(btn)" v-for="(btn, index) in panelBtn"
+      :key="index">{{btn}}</button>
+      <div class="switch-value">
+      <input type="radio" value="oneOp" name="" id="oneOp" v-model="picked">
+      <label for="">1 Операнд</label>
+      <input type="radio" value="tuOp" name="" id="tuOp" v-model="picked">
+      <label for="">2 Операнд</label>
+      <p class="txt-operand" v-if="noChecked">Выберете операнд</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,7 +42,13 @@ export default {
     conditionTu: 0,
     result: '',
     showTxt: false,
-    zero: false
+    zero: false,
+    panelBtn: [1, 2, 3, 4, 5, 6, 7, 8, 9, '<'],
+    showPanel: false,
+    checkConditionOne: true,
+    checkConditiontu: false,
+    noChecked: false,
+    picked: ''
   }),
   props: {
     msg: String
@@ -91,11 +112,43 @@ export default {
         this.zero = false
         this.result = Math.floor(this.conditionOne / this.conditionTu)
       }
+    },
+    PanelBtnAdd (btn) {
+      if (this.picked === 'oneOp') {
+        this.noChecked = false
+        this.conditionOne = parseInt(this.conditionOne + String(btn))
+        if (btn === '<') {
+          this.conditionOne = String(this.conditionOne).split('')
+          this.conditionOne.splice(-1, 1).join('')
+          console.log(this.conditionOne.join(''))
+        }
+      } if (this.picked === 'tuOp') {
+        this.noChecked = false
+        this.conditionTu = parseInt(this.conditionTu + String(btn))
+      } else if (this.picked === '') {
+        this.noChecked = true
+      }
     }
   }
 }
 </script>
 
 <style>
-
+.panel{
+ width: fit-content;
+ margin: auto;
+}
+.check-panel{
+  width: fit-content;
+  margin: auto;
+  padding: 30px 0px 20px 0px;
+}
+.switch-value{
+ width: fit-content;
+ margin: auto;
+ margin-top: 10px;
+}
+.txt-operand{
+  text-align: center;
+}
 </style>
