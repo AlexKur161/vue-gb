@@ -113,18 +113,32 @@ export default {
         this.result = Math.floor(this.conditionOne / this.conditionTu)
       }
     },
+    deleteNumber (value) {
+      const tesQ = String(value).split('')
+      const tesQQ = tesQ.splice(-1, 1)
+      const testQQQ = tesQ.join('')
+      console.log(tesQQ)
+      return parseInt(testQQQ)
+    },
     PanelBtnAdd (btn) {
       if (this.picked === 'oneOp') {
         this.noChecked = false
         this.conditionOne = parseInt(this.conditionOne + String(btn))
         if (btn === '<') {
-          this.conditionOne = String(this.conditionOne).split('')
-          this.conditionOne.splice(-1, 1).join('')
-          console.log(this.conditionOne.join(''))
+          this.conditionOne = this.deleteNumber(this.conditionOne)
+          if (isNaN(this.conditionOne)) {
+            this.conditionOne = 0
+          }
         }
       } if (this.picked === 'tuOp') {
         this.noChecked = false
         this.conditionTu = parseInt(this.conditionTu + String(btn))
+        if (btn === '<') {
+          this.conditionTu = this.deleteNumber(this.conditionTu)
+          if (isNaN(this.conditionTu)) {
+            this.conditionTu = 0
+          }
+        }
       } else if (this.picked === '') {
         this.noChecked = true
       }
