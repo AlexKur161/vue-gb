@@ -1,45 +1,42 @@
 <template>
   <div id="app">
-    <MyCalculator msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <h1>My personal costs</h1>
+      <AddingExpenses @add-expenses="addExpenses" />
+      <ListExpenses :Arraylistexpenses="ArrayListexpenses" />
+    </div>
   </div>
 </template>
 
 <script>
-import MyCalculator from './components/MyСanculator.vue'
+import ListExpenses from '@/components/ListExpenses.vue'
+import AddingExpenses from '@/components/AddingExpenses.vue'
 
 export default {
   name: 'App',
+  data: () => ({
+    ArrayListexpenses: []
+  }),
   components: {
-    MyCalculator
+    ListExpenses,
+    AddingExpenses
+  },
+  methods: {
+    addExpenses (expensesDay) {
+      this.ArrayListexpenses.push(expensesDay)
+    }
   }
 }
 </script>
 
 <style>
+
 *{
   box-sizing: border-box;
 }
 .container{
-  max-width: 600px;
+  max-width: 1200px;
   margin: auto;
 }
-.title{
-  text-align: center;
-  margin: 60px 0px;
-}
-.condition-wrap{
-  height: 50px;
-  width: 100%;
-}
-.calculation-btn{
-  width: 100%;
-  height: 60px;
-  font-size: 26px;
-  background: beige;
-  border: 1px solid #6355e53b;
-  cursor: pointer;
-}
-.calculator-wrap{
-  display: flex;
-}
+
 </style>
