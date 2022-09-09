@@ -1,45 +1,56 @@
 <template>
   <div id="app">
-    <MyCalculator msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <h1>My personal costs {{ TotalCost }}</h1>
+      <AddingExpenses
+      @add-expenses="addExpenses"
+      :ArrayCategory = "ArrayCategory"
+      />
+      <ListExpenses :Arraylistexpenses="ArrayListexpenses" />
+    </div>
   </div>
 </template>
 
 <script>
-import MyCalculator from './components/MyСanculator.vue'
-
+import ListExpenses from '@/components/ListExpenses.vue'
+import AddingExpenses from '@/components/AddingExpenses.vue'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'App',
+  data: () => ({
+    // ArrayListexpenses: []
+  }),
   components: {
-    MyCalculator
+    ListExpenses,
+    AddingExpenses
+  },
+  computed: {
+    ...mapGetters(['ArrayListexpenses', 'ArrayCategory', 'TotalCost'])
+    // ArrayListexpenses () {
+    //   return this.$store.state.ArrayListexpenses
+    // }
+  },
+  methods: {
+    ...mapActions(['fetchData', 'fetchCategory']),
+    addExpenses (expensesDay) {
+      this.$store.commit('ADD_FETCH_PAYMENT', expensesDay)
+    }
+  },
+  created () {
+    this.fetchData()
+    this.fetchCategory()
   }
 }
 </script>
 
 <style>
+
 *{
   box-sizing: border-box;
 }
 .container{
-  max-width: 600px;
+  max-width: 1200px;
   margin: auto;
 }
-.title{
-  text-align: center;
-  margin: 60px 0px;
-}
-.condition-wrap{
-  height: 50px;
-  width: 100%;
-}
-.calculation-btn{
-  width: 100%;
-  height: 60px;
-  font-size: 26px;
-  background: beige;
-  border: 1px solid #6355e53b;
-  cursor: pointer;
-}
-.calculator-wrap{
-  display: flex;
-}
+
 </style>
