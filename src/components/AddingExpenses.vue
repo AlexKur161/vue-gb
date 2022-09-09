@@ -3,7 +3,12 @@
       <button class="btn-additem" @click="showForm = !showForm">ADD NEW COST</button>
       <form class="add-form" v-if="showForm" action="">
         <input placeholder="Date" type="text" v-model="date">
-        <input placeholder="Category" type="text" v-model="category">
+        <select class="select-inp" v-model="category">
+          <option value=""> Выберите категорию</option>
+          <option
+          v-for="(cat, index) in ArrayCategory"
+          :key="index">{{cat}}</option>
+        </select>
         <input placeholder="Value" type="number" v-model="value">
         <button :disabled="validItem()" class="btn-additem btn-form" @click.prevent="addExpenses"> Add expenses</button>
       </form>
@@ -13,11 +18,17 @@
 
 export default {
   name: 'AddingExpenses',
+  props: {
+    ArrayCategory: {
+      type: Array
+    }
+  },
   data: () => ({
     showForm: false,
     date: '',
     category: '',
-    value: ''
+    value: '',
+    selectedValue: ''
   }),
   methods: {
     addExpenses () {
@@ -25,7 +36,7 @@ export default {
       const expensesDay = {
         date: date || this.currentDate,
         category,
-        value
+        value: Number(value)
       }
       this.date = ''
       this.category = ''
@@ -83,5 +94,14 @@ input{
     border: 1px solid #008ac1;
     margin-right: 10px;
     padding-left: 10px;
+}
+.select-inp{
+    height: 40px;
+    border: 1px solid #008ac1;
+    margin-right: 10px;
+    padding: 10px 20px;
+-moz-appearance: none;
+-webkit-appearance: none;
+outline: none;
 }
 </style>

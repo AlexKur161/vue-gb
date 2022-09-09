@@ -20,7 +20,7 @@
           </div>
         </div>
         <div v-else>
-          <p class="no-list">You haven't added your expenses yet</p>
+          <p class="no-list">We are waiting for the data</p>
         </div>
       </div>
       <div class="tu-block"></div>
