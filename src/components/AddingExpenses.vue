@@ -1,6 +1,11 @@
 <template>
     <div>
       <button class="btn-additem" @click="showForm = !showForm">ADD NEW COST</button>
+      <div class="wrap-routeradd">
+      <button class="btn-additem" @click="addFood">addFood</button>
+      <button class="btn-additem" @click="addTransport">addTransport</button>
+      <button class="btn-additem" @click="addEntertainment">addEntertainment</button>
+      </div>
       <form class="add-form" v-if="showForm" action="">
         <input placeholder="Date" type="text" v-model="date">
         <select class="select-inp" v-model="category">
@@ -42,6 +47,36 @@ export default {
       this.category = ''
       this.value = ''
       this.$emit('add-expenses', expensesDay)
+    },
+    addFood () {
+      // this.$route({
+      //   params: {
+      //     categotyRout: 'food',
+      //     valueRout: 200
+      //   }
+      // })
+      this.showForm = true
+      this.$route.params.value = 200
+      this.$route.params.category = 'food'
+      this.category = this.$route.params.category
+      this.value = this.$route.params.value
+      console.log(this.$route.params)
+    },
+    addTransport () {
+      this.showForm = true
+      this.$route.params.value = 50
+      this.$route.params.category = 'transport'
+      this.category = this.$route.params.category
+      this.value = this.$route.params.value
+      console.log(this.$route.params)
+    },
+    addEntertainment () {
+      this.showForm = true
+      this.$route.params.value = 2000
+      this.$route.params.category = 'Entertainment'
+      this.category = this.$route.params.category
+      this.value = this.$route.params.value
+      console.log(this.$route.params)
     },
     validItem () {
       if (this.category === '' || this.value === '') {
@@ -103,5 +138,10 @@ input{
 -moz-appearance: none;
 -webkit-appearance: none;
 outline: none;
+}
+.wrap-routeradd{
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
 }
 </style>

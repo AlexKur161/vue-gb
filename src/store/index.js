@@ -49,7 +49,7 @@ export default new Vuex.Store({
     },
     fetchCategory ({ commit }) {
       setTimeout(() => {
-        const category = ['food', 'transport', 'journeys', 'lesson']
+        const category = ['food', 'transport', 'journeys', 'lesson', 'Entertainment']
         commit('FETCH_CATEGORY', category)
       }, 2000)
     }
