@@ -55,6 +55,8 @@ export default {
       //     valueRout: 200
       //   }
       // })
+      console.log(this.$route)
+      console.log(this.$router)
       this.showForm = true
       this.$route.params.value = 200
       this.$route.params.category = 'food'
