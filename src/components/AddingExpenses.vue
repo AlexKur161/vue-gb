@@ -1,12 +1,11 @@
 <template>
     <div>
-      <button class="btn-additem" @click="showForm = !showForm">ADD NEW COST</button>
       <div class="wrap-routeradd">
       <button class="btn-additem" @click="addFood">addFood</button>
       <button class="btn-additem" @click="addTransport">addTransport</button>
       <button class="btn-additem" @click="addEntertainment">addEntertainment</button>
       </div>
-      <form class="add-form" v-if="showForm" action="">
+      <form class="add-form" action="">
         <input placeholder="Date" type="text" v-model="date">
         <select class="select-inp" v-model="category">
           <option value=""> Выберите категорию</option>
@@ -29,7 +28,6 @@ export default {
     }
   },
   data: () => ({
-    showForm: false,
     date: '',
     category: '',
     value: '',

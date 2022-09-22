@@ -1,18 +1,15 @@
 <template>
     <div class="container">
         <h1>My personal costs {{ TotalCost }}</h1>
-      <AddingExpenses
-      @add-expenses="addExpenses"
-      :ArrayCategory = "ArrayCategory"
-      />
+        <ModalDash />
       <ListExpenses :Arraylistexpenses="ArrayListexpenses" />
     </div>
 </template>
 
 <script>
 import ListExpenses from '@/components/ListExpenses.vue'
-import AddingExpenses from '@/components/AddingExpenses.vue'
-import { mapActions, mapGetters } from 'vuex'
+import ModalDash from '@/components/ModalDash.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   data: () => ({
@@ -20,23 +17,13 @@ export default {
   }),
   components: {
     ListExpenses,
-    AddingExpenses
+    ModalDash
   },
   computed: {
-    ...mapGetters(['ArrayListexpenses', 'ArrayCategory', 'TotalCost'])
+    ...mapGetters(['ArrayListexpenses', 'TotalCost'])
     // ArrayListexpenses () {
     //   return this.$store.state.ArrayListexpenses
     // }
-  },
-  methods: {
-    ...mapActions(['fetchData', 'fetchCategory']),
-    addExpenses (expensesDay) {
-      this.$store.commit('ADD_FETCH_PAYMENT', expensesDay)
-    }
-  },
-  created () {
-    this.fetchData()
-    this.fetchCategory()
   }
 }
 </script>
