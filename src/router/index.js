@@ -10,6 +10,11 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      name: 'dashboard',
+      component: DashBoard
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: DashBoard
@@ -20,16 +25,9 @@ const router = new VueRouter({
       component: AboutPage
     },
     {
-      path: '/notfound',
+      path: '*',
       name: 'notfound',
       component: NotFound
-    },
-    {
-      path: '*',
-      redirect: {
-        name: 'notfound',
-        component: NotFound
-      }
     }
   ]
 })

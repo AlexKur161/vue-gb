@@ -4,11 +4,13 @@
             <button class="btn-additem" @click="showForm = !showForm">ADD NEW COST</button>
             <div v-if="showForm" class="form-add">
                 <div class="wrap-form">
+                  <h3>{{title}}</h3>
                     <button class="btn-close" @click="showForm = !showForm">&times;</button>
                 <AddingExpenses
       @add-expenses="addExpenses"
       :ArrayCategory = "ArrayCategory"
       />
+      <AuthReg />
       </div>
             </div>
         </div>
@@ -17,13 +19,24 @@
 <script>
 
 import AddingExpenses from '@/components/AddingExpenses.vue'
+import AuthReg from '@/components/AuthReg.vue'
 import { mapActions, mapGetters } from 'vuex'
 export default {
+  props: {
+    settings: {
+      type: Object,
+      default: () => ({
+        title: 'Modal window',
+        content: ''
+      })
+    }
+  },
   data: () => ({
     showForm: false
   }),
   components: {
-    AddingExpenses
+    AddingExpenses,
+    AuthReg
   },
   methods: {
     ...mapActions(['fetchData', 'fetchCategory']),
@@ -32,7 +45,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['ArrayCategory'])
+    ...mapGetters(['ArrayCategory']),
+    title () {
+      return this.settings.title
+    }
   },
   created () {
     this.fetchData()
