@@ -9,8 +9,8 @@
                 <AddingExpenses
       @add-expenses="addExpenses"
       :ArrayCategory = "ArrayCategory"
-      />
-      <AuthReg />
+      v-if="settings.content === 'Modal'"/>
+      <AuthReg v-if="settings.content === 'Auth'"/>
       </div>
             </div>
         </div>
