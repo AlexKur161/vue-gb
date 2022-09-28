@@ -45,13 +45,13 @@ export default new Vuex.Store({
           }
         ]
         commit('FETCH_PAYMENT', fetchPaymentsData)
-      }, 1000)
+      }, 100)
     },
     fetchCategory ({ commit }) {
       setTimeout(() => {
         const category = ['food', 'transport', 'journeys', 'lesson', 'Entertainment']
         commit('FETCH_CATEGORY', category)
-      }, 2000)
+      }, 100)
     }
   }
 })

@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="content">
-            <button class="btn-additem" @click="showForm = !showForm">ADD NEW COST</button>
-            <div v-if="showForm" class="form-add">
+            <!-- <button class="btn-additem" @click="showForm = !showForm">ADD NEW COST</button> -->
+            <div class="form-add">
                 <div class="wrap-form">
                   <h3>{{title}}</h3>
-                    <button class="btn-close" @click="showForm = !showForm">&times;</button>
+                    <button class="btn-close">&times;</button>
                 <AddingExpenses
       @add-expenses="addExpenses"
       :ArrayCategory = "ArrayCategory"
@@ -31,9 +31,6 @@ export default {
       })
     }
   },
-  data: () => ({
-    showForm: false
-  }),
   components: {
     AddingExpenses,
     AuthReg

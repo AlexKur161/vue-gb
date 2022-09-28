@@ -9,13 +9,42 @@
       </nav>
       </header>
       <main>
+        <button @click="showModal = !showModal">ADD NEW COST</button>
         <router-view></router-view>
       </main>
+       <ModalDash :showModal="showModal" v-if="showModal"/>
       <footer></footer>
     </div>
   </div>
 </template>
+<script>
+import ModalDash from '@/components/ModalDash.vue'
 
+export default {
+  data () {
+    return {
+      showModal: false,
+      ModalSettings: {}
+    }
+  },
+  components: {
+    ModalDash
+  },
+  methods: {
+    ModalOpen (settings) {
+      this.ModalSettings = settings
+      this.showModal = true
+    },
+    ModalClose () {
+      this.showModal = false
+    }
+  },
+  mounted () {
+    this.$modal.EventBus.$on('show', this.ModalOpen)
+    this.$modal.EventBus.$on('hide', this.ModalClose)
+  }
+}
+</script>
 <style>
 
 *{
