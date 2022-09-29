@@ -17,6 +17,9 @@ export default new Vuex.Store({
     },
     FETCH_CATEGORY (state, select) {
       state.ArrayCategory = select
+    },
+    SWITCH_EXP (state, settings) {
+      state.ArrayCategory.find((item) => item === settings)
     }
   },
   getters: {

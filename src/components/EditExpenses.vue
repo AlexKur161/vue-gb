@@ -1,8 +1,9 @@
 <template>
     <div>
-        <input v-model="settings.date" type="text">
-        <input v-model="settings.category" type="text">
-        <input v-model="settings.value" type="text">
+        <input :value="settings.date" type="text">
+        <input :value="settings.category" type="text">
+        <input :value="settings.value" type="text">
+        <button>save</button>
     </div>
 </template>
 <script>
@@ -30,11 +31,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fethData'])
+    ...mapActions(['fethData']),
+    saveExpenses () {
+      const exp = {
+        date: this.settings.date,
+        category: this.settings.category,
+        value: this.settings.value
+      }
+      this.$store.commit('ADD_FETCH_PAYMENT', exp)
+    }
   },
   computed: {
     ...mapGetters(['ArrayListexpenses'])
-    
   },
   created () {
     // this.ArrayListexpenses.forEach(element => console.log(element))
