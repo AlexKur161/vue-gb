@@ -8,6 +8,7 @@
               <div class="mini-item"><p>Date</p></div>
               <div class="mini-item"><p>Category</p></div>
               <div class="mini-item"><p>Value</p></div>
+              <div class="mini-item mini-item4"></div>
             </div>
             <div class="item-list"
             v-for="(item,index) in Arraylistexpenses"
@@ -16,6 +17,9 @@
               <div class="mini-item"><p>{{item.date}}</p></div>
               <div class="mini-item"><p>{{item.category}}</p></div>
               <div class="mini-item"><p>{{item.value}}</p></div>
+              <div class="mini-item mini-item4">
+              <button @click="EditModal(item.date, item.category, item.value)" class="edit-btn">&brvbar;</button>
+              </div>
             </div>
           </div>
         </div>
@@ -42,10 +46,13 @@ export default {
       } else {
         return true
       }
+    },
+    EditModal (date, category, value) {
+      this.$modal.show({ title: 'Edit expenses', content: 'Edit', date: date, category: category, value: value })
     }
   }
 }
-
+// { }
 </script>
 <style scoped>
 .item-list{
@@ -74,10 +81,23 @@ margin-bottom: 10px;
 .mini-item1{
 flex-basis: 10%;
 }
+.mini-item4{
+  flex-basis: 5%;
+  display: flex;
+align-items: center;
+}
 .mini-item p{
   color:#fff;
 }
 .no-list{
   color: #fff;
+}
+.edit-btn{
+  background: none;
+    border: none;
+    outline: none;
+    height: 18px;
+    padding-bottom: 20px;
+    cursor: pointer;
 }
 </style>

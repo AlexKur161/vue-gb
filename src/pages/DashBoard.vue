@@ -1,7 +1,10 @@
 <template>
     <div class="container">
         <h1>My personal costs {{ TotalCost }}</h1>
-        <button @click="addModal">test</button>
+        <div class="wrap-btn">
+        <button class="btn-additem" @click="addModal">add expenses</button>
+        <button class="btn-additem" @click="addAuthorization">authorization</button>
+        </div>
       <ListExpenses :Arraylistexpenses="ArrayListexpenses" />
     </div>
 </template>
@@ -28,10 +31,29 @@ export default {
     ...mapActions(['fetchData']),
     addModal () {
       this.$modal.show({ title: 'Add expenses', content: 'Modal' })
+    },
+    addAuthorization () {
+      this.$modal.show({ title: 'Authorization', content: 'Auth' })
     }
   },
-  created () {
+  mounted () {
     this.fetchData()
   }
 }
 </script>
+<style scoped>
+.btn-additem{
+  padding: 15px 60px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: #008ac1;
+    color: #fff;
+    display: block;
+    cursor: pointer;
+}
+.wrap-btn{
+  display: flex;
+  gap: 30px;
+}
+</style>

@@ -9,16 +9,14 @@
       </nav>
       </header>
       <main>
-        <button @click="showModal = !showModal">ADD NEW COST</button>
         <router-view></router-view>
       </main>
-       <ModalDash :showModal="showModal" v-if="showModal"/>
+       <ModalDash :settings="ModalSettings" v-if="showModal"/>
       <footer></footer>
     </div>
   </div>
 </template>
 <script>
-import ModalDash from '@/components/ModalDash.vue'
 
 export default {
   data () {
@@ -28,7 +26,7 @@ export default {
     }
   },
   components: {
-    ModalDash
+    ModalDash: () => import('@/components/ModalDash.vue')
   },
   methods: {
     ModalOpen (settings) {

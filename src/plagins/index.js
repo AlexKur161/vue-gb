@@ -8,7 +8,7 @@ export default {
         this.EventBus.$emit('show', settings)
       },
       hide () {
-        console.log('hide')
+        this.EventBus.$emit('hide')
       }
     }
   }

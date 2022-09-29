@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import DashBoard from '../pages/DashBoard'
-import AboutPage from '../pages/AboutPage.vue'
-import NotFound from '../pages/NotFound'
 
 Vue.use(VueRouter)
 
@@ -12,22 +9,22 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'dashboard',
-      component: DashBoard
+      component: () => import('../pages/DashBoard.vue')
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: DashBoard
+      component: () => import(/* webpackChunkName: "DashBoard" */'../pages/DashBoard.vue')
     },
     {
       path: '/about',
       name: 'about',
-      component: AboutPage
+      component: () => import(/* webpackChunkName: "AboutPage" */'../pages/AboutPage.vue')
     },
     {
       path: '*',
       name: 'notfound',
-      component: NotFound
+      component: () => import(/* webpackChunkName: "notFound" */ '../pages/NotFound.vue')
     }
   ]
 })

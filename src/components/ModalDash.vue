@@ -5,12 +5,13 @@
             <div class="form-add">
                 <div class="wrap-form">
                   <h3>{{title}}</h3>
-                    <button class="btn-close">&times;</button>
+                    <button @click="closeBtn" class="btn-close">&times;</button>
                 <AddingExpenses
       @add-expenses="addExpenses"
       :ArrayCategory = "ArrayCategory"
       v-if="settings.content === 'Modal'"/>
       <AuthReg v-if="settings.content === 'Auth'"/>
+      <EditExpenses :settings="settings" v-if="settings.content === 'Edit'"/>
       </div>
             </div>
         </div>
@@ -20,6 +21,7 @@
 
 import AddingExpenses from '@/components/AddingExpenses.vue'
 import AuthReg from '@/components/AuthReg.vue'
+import EditExpenses from '@/components/EditExpenses.vue'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
@@ -27,18 +29,25 @@ export default {
       type: Object,
       default: () => ({
         title: 'Modal window',
-        content: ''
+        content: '',
+        date: '',
+        category: '',
+        value: ''
       })
     }
   },
   components: {
     AddingExpenses,
-    AuthReg
+    AuthReg,
+    EditExpenses
   },
   methods: {
     ...mapActions(['fetchData', 'fetchCategory']),
     addExpenses (expensesDay) {
       this.$store.commit('ADD_FETCH_PAYMENT', expensesDay)
+    },
+    closeBtn () {
+      this.$modal.hide()
     }
   },
   computed: {
